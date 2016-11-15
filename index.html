@@ -99,7 +99,28 @@ Spotify.prototype.onSearchSubmitted = function(event) {
     this.result.toggleClass('transparent');
 };
 Spotify.prototype.search = function(name) {
+   // getArtist is a function that returns a Promise
+   // Promises have a .then method which take a function as an argument
+   // And pass in data to that function
+
+   // function getArtist(name) {
+   //   return 'the artist is Prince'
+   // }
+
+   // function getArtist(name) {
+   //  // call an api
+   //  var myApiData = callMyApi()
+
+   //  return {
+   //      then: function(callback) {
+   //          // done calling my api
+   //          callback(myApiData) 
+   //      }
+   //  }
+   // }
+
     getArtist(name).then(this.onSearchDone.bind(this));
+    // undefined.then(this...)
 };
 Spotify.prototype.onSearchDone = function(artist) {
     var result = $(this.artistTemplate(artist));
