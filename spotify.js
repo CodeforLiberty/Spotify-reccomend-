@@ -32,24 +32,25 @@ var getArtist = function(name) {
       q:name,
       limit:1,
       type: 'artist'
+      // id: '1uNFoZAHBGtllmzznpCI3s'
     };
 
-    return getFromApi('search', param).then(function (json) {  
+    return getFromApi('search', param).then(function (json) {
         artist = json.artists.items[0];
-        return artist;
+        console.log(json);
+        var getRelatedArtist = function(id){
+          var url = 'https://api.spotify.com/v1/artists/{id}/related-artists';
+          // get the artist ID from the initial getFromApi function and hook it
+          // into this function
+        };
+        return getRelatedArtist().then(function(){
+          // Set artist.related to item.artists
+          // Then return artist object i.e return artist;
+
+        });
+    }).catch(function(err) {
+      console.log(err);
     });
-
-    console.log(3);
-   // getFromApi('search', param).then(function(json){ //json is  promise.value
-      console.log(7);
-      
-    console.log(json.artists.items);
-    
-  //}).catch(function(err) {
-    console.log(err);
-//});
-    console.log(4.5);
-    //return getFromApi()
   };
-//console.log(2);
 
+getArtist('Justin');
