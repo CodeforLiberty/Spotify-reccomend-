@@ -37,20 +37,38 @@ var getArtist = function(name) {
 
     return getFromApi('search', param).then(function (json) {
         artist = json.artists.items[0];
-        console.log(json);
-        var getRelatedArtist = function(id){
-          var url = 'https://api.spotify.com/v1/artists/{id}/related-artists';
-          // get the artist ID from the initial getFromApi function and hook it
+        console.log(json.artists.items[0].id);
+        var artistId = json.artists.items[0].id;
+       
+        // }); 
+         // var getRelatedArtist = (function(id){
+         var url = `artists/${artistId}/related-artists`;
+          
+         //  // get the artist ID from the initial getFromApi function and hook it
+         //  var artistId = json.artists.items[0].id;
+         //  console.log(artistId);
           // into this function
-        };
-        return getRelatedArtist().then(function(){
+    //     return getRelatedArtist()
+    // }).then(function(artists){
           // Set artist.related to item.artists
           // Then return artist object i.e return artist;
+          // getRelatedArtist();
 
-        });
-    }).catch(function(err) {
-      console.log(err);
+          return getFromApi(url);
+        }).then(function(item) {
+            console.log(item);
+            artist.related=item.artists;
+            return artist;
+        })
+    .catch(function(err) {
+      console.log("what???");
     });
-  };
+  }
+
 
 getArtist('Justin');
+// getRelatedArtist(artistId);
+
+// asyncthing.then(
+//     return something).
+//     then()
