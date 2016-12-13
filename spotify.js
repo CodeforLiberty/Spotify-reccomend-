@@ -24,13 +24,18 @@ const getArtist = (name) => {
     };
 
     
-   return getFromApi('search',query).then((response) => {
-    artist = response.artists.items[0];
+   return getFromApi('search',query).then((res) => {
+    artist = res.artists.items[0];
     console.log(artist);
-    return artist;
+    console.log(res.artists.items[0].id);
+     return getFromApi(`artists/${res.artists.items[0].id}/related-artists`).then((res) => {
+        artist.related = res.artists;
+        return artist;
+     })
 
         console.log(response);
-    }).catch((err) => {
+    })
+   .catch((err) => {
         console.log("Not getting a response, did you type in a artist?");
     });
    };
